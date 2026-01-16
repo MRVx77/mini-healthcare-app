@@ -40,4 +40,8 @@ app.post("/api/faq", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("Healthcare NGO FAQ API is running.");
+});
+
 app.listen(5000, () => console.log("Server running on http://localhost:5000"));
