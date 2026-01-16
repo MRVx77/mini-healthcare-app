@@ -49,7 +49,10 @@ const AIFaq = () => {
 
     // 2️⃣ AI fallback
     try {
-      const res = await fetch("http://localhost:5000/api/faq", {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      if (!apiUrl) throw new Error("Backend URL not set");
+
+      const res = await fetch(`${apiUrl}/api/faq`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question }),
@@ -59,7 +62,6 @@ const AIFaq = () => {
       setResponse(data.answer || "AI could not generate a response.");
     } catch (error) {
       console.log(error);
-
       setResponse(
         "Thank you for your question. Our team will respond shortly."
       );
