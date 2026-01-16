@@ -24,47 +24,82 @@ const faqs = [
 const AIFaq = () => {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleAsk = () => {
+  const handleAsk = async () => {
+    if (!question.trim()) return;
+
+    setLoading(true);
+    setResponse("");
+
     const lowerQuestion = question.toLowerCase();
+
+    // 1️⃣ Rule-based match
     const matchedFaq = faqs.find((faq) =>
       faq.keywords.some((word) => lowerQuestion.includes(word))
     );
 
     if (matchedFaq) {
-      setResponse(matchedFaq.answer);
-    } else {
+      setTimeout(() => {
+        setResponse(matchedFaq.answer);
+        setLoading(false);
+      }, 600); // small delay for AI feel
+      return;
+    }
+
+    // 2️⃣ AI fallback
+    try {
+      const res = await fetch("http://localhost:5000/api/faq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question }),
+      });
+
+      const data = await res.json();
+      setResponse(data.answer || "AI could not generate a response.");
+    } catch (error) {
+      console.log(error);
+
       setResponse(
-        "Thank you for your question. Our team will get back to you shortly."
+        "Thank you for your question. Our team will respond shortly."
       );
     }
+
+    setLoading(false);
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md mt-6">
-      <h2 className="text-xl font-semibold mb-4">
-        AI Healthcare FAQ Assistant
-      </h2>
+    <div className="bg-white p-6 rounded-2xl shadow-lg">
+      {/* Header */}
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-green-600 text-xl">🤖</span>
+        <h2 className="text-xl font-semibold text-gray-800">
+          AI Healthcare Assistant
+        </h2>
+      </div>
 
+      {/* Input */}
       <input
         type="text"
-        placeholder="Ask a question..."
+        placeholder="Ask about healthcare support, emergencies, cost..."
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
-        className="w-full p-2 border rounded-md mb-3"
+        className="w-full p-3 border rounded-lg mb-3 focus:outline-none focus:ring-2 focus:ring-green-400"
       />
 
+      {/* Button */}
       <button
         onClick={handleAsk}
-        disabled={!question.trim()}
-        className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 disabled:opacity-50"
+        disabled={!question.trim() || loading}
+        className="w-full bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition disabled:opacity-50"
       >
-        Ask AI
+        {loading ? "AI is thinking..." : "Ask AI"}
       </button>
 
+      {/* Response */}
       {response && (
-        <div className="mt-4 p-3 bg-gray-100 rounded-md">
-          <p className="text-sm">{response}</p>
+        <div className="mt-4 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+          <p className="text-sm text-gray-700">{response}</p>
         </div>
       )}
     </div>

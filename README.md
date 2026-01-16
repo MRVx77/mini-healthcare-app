@@ -51,6 +51,19 @@ This application helps by:
 
 ---
 
+### Hybrid AI FAQ System
+
+The FAQ assistant uses a hybrid approach:
+
+- Rule-based automation for common questions
+- Real AI (OpenAI) as a fallback for complex or unknown queries
+
+This ensures:
+
+- Fast responses
+- Low operational cost
+- Graceful degradation if AI services are unavailable
+
 ## Future Improvements
 
 - Integrate real AI APIs (e.g., OpenAI)
