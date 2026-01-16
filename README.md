@@ -1,16 +1,59 @@
-# React + Vite
+# Mini Healthcare Support Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This is a simple healthcare support web application designed for NGOs.
+It allows patients to submit healthcare-related requests and provides an
+AI-based FAQ assistant to answer common questions automatically.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project focuses on clarity, usability, and conceptual AI integration.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Patient Support Request Form
+- AI-powered FAQ Assistant (rule-based automation)
+- Clean and responsive UI using Tailwind CSS
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## AI / Automation Idea
+
+The AI FAQ Assistant simulates an intelligent chatbot using keyword-based
+matching to identify user intent and provide relevant responses.
+
+This helps NGOs:
+
+- Reduce repetitive questions
+- Respond faster to common healthcare queries
+- Improve overall efficiency
+
+---
+
+## Tech Stack
+
+- Frontend: React.js (Vite)
+- Language: JavaScript
+- Styling: Tailwind CSS
+- AI Logic: Rule-based FAQ automation (concept simulation)
+
+---
+
+## NGO Use Case
+
+NGOs often receive repeated healthcare-related questions.
+This application helps by:
+
+- Digitally collecting patient support requests
+- Automatically answering common questions
+- Allowing volunteers to focus on urgent cases
+
+---
+
+## Future Improvements
+
+- Integrate real AI APIs (e.g., OpenAI)
+- Add admin dashboard for NGOs
+- Store form submissions in a database
+- Add multilingual support
